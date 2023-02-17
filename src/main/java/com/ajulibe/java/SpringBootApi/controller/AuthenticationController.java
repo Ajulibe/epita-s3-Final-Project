@@ -3,11 +3,8 @@ package com.ajulibe.java.SpringBootApi.controller;
 import com.ajulibe.java.SpringBootApi.dto.ContactDetailsDTO;
 import com.ajulibe.java.SpringBootApi.entity.Address;
 import com.ajulibe.java.SpringBootApi.entity.Contact;
-import com.ajulibe.java.SpringBootApi.entity.UserEntity;
 import com.ajulibe.java.SpringBootApi.repository.AddressRepository;
 import com.ajulibe.java.SpringBootApi.repository.ContactRepository;
-import com.ajulibe.java.SpringBootApi.repository.JwtUserRepo;
-import com.ajulibe.java.SpringBootApi.security.authentication.helpers.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,45 +19,46 @@ import javax.validation.Valid;
 @RequestMapping("/api/v1")
 public class AuthenticationController {
 
-    private JwtUserRepo userRepository;
     private AddressRepository addressRepository;
     private ContactRepository contactRepository;
 
 
     @Autowired
-    public AuthenticationController(JwtUserRepo userRepository, AddressRepository  addressRepository, ContactRepository contactRepository) {
-        this.userRepository = userRepository;
+    public AuthenticationController(AddressRepository addressRepository, ContactRepository contactRepository) {
         this.addressRepository = addressRepository;
-        this. contactRepository = contactRepository;
+        this.contactRepository = contactRepository;
 
     }
 
     @PostMapping("/store-details")
     public ResponseEntity<?> register(@Valid @RequestBody ContactDetailsDTO contactDetails) {
         try {
+            // Check if the contact already exists
+            if (contactRepository.findByEmailAddress(contactDetails.emailAddress()) != null) {
+                return ResponseEntity.status(HttpStatus.CONFLICT).body("Contact with the same email address already exists");
+            }
+
+
             // Create a new Contact entity
             Contact contact = new Contact();
-            // Set the user
-            UserEntity user = new UserEntity(); // set the user here
-            contact.setUser(user);
-            // Set the contact details
-            contact.setFirstName(contactDetails.firstName());
-            contact.setLastName(contactDetails.lastName());
-            contact.setPhoneNumber(contactDetails.phoneNumber());
-            contact.setEmailAddress(contactDetails.emailAddress());
+            contact.setUserId(contactDetails.userId() != null ? contactDetails.userId() : null);
+            contact.setFirstName(contactDetails.firstName() != null ? contactDetails.firstName() : null);
+            contact.setLastName(contactDetails.lastName() != null ? contactDetails.lastName() : null);
+            contact.setPhoneNumber(contactDetails.phoneNumber() != null ? contactDetails.phoneNumber() : null);
+            contact.setEmailAddress(contactDetails.emailAddress() != null ? contactDetails.emailAddress() : null);
 
             // Create a new Address entity
             Address address = new Address();
-            address.setCountry(contactDetails.country());
-            address.setArea(contactDetails.area());
-            address.setCity(contactDetails.city());
-            address.setStreet(contactDetails.street());
-            address.setStreetNumber(contactDetails.streetNumber());
+            address.setCountry(contactDetails.country() != null ? contactDetails.country() : null);
+            address.setArea(contactDetails.area() != null ? contactDetails.area() : null);
+            address.setCity(contactDetails.city() != null ? contactDetails.city() : null);
+            address.setStreet(contactDetails.street() != null ? contactDetails.street() : null);
+            address.setStreetNumber(contactDetails.streetNumber() != null ? contactDetails.streetNumber() : null);
 
             // Save the Address entity
             addressRepository.save(address);
             // Set the billing address of the Contact entity
-            contact.setBillingAddress(address);
+            contact.setBillingAddress(null);
             // Save the Contact entity
             contactRepository.saveUserContactDetails(contact);
 

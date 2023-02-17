@@ -37,7 +37,6 @@ public class MoviesController {
     @GetMapping("/get-all-movies")
     public ResponseEntity<List<Movie>> findAll() {
         List<Movie> movies = moviesService.findAll();
-        System.out.println(movies);
         return ResponseEntity.ok(movies);
     }
 

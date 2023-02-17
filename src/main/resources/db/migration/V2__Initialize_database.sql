@@ -30,43 +30,11 @@ CREATE TABLE authors
 );
 
 
+
 ALTER TABLE movies
     ADD CONSTRAINT fk_movies_author FOREIGN KEY (author_id) REFERENCES authors (id);
 
 
-
--- create table if not exists bookings
--- (
---     bookid    integer                     not null,
---     facid     integer                     not null,
---     memid     integer                     not null,
---     starttime timestamp without time zone not null,
---     slots     integer                     not null
--- );
-
-
--- create table if not exists facilities
--- (
---     facid              integer                not null,
---     firstname          character varying(100) not null,
---     membercost         numeric                not null,
---     guestcost          numeric                not null,
---     initialoutlay      numeric                not null,
---     monthlymaintenance numeric                not null
--- );
-
-
--- create table if not exists members
--- (
---     memid         integer                     not null,
---     surname       character varying(200)      not null,
---     firstname     character varying(200)      not null,
---     address       character varying(300)      not null,
---     zipcode       integer                     not null,
---     telephone     character varying(20)       not null,
---     recommendedby integer,
---     joindate      timestamp without time zone not null
--- );
 
 create TYPE valid_roles AS ENUM ('role_admin', 'role_moderator', 'role_user');
 
@@ -93,6 +61,30 @@ create table if not exists users
     constraint fk_roles foreign key (role) references role (id),
     enabled  boolean                not null,
     joindate timestamp without time zone
+);
+
+
+
+CREATE TABLE IF NOT EXISTS addresses
+(
+    id            SERIAL PRIMARY KEY,
+    country       VARCHAR(255),
+    area          VARCHAR(255),
+    city          VARCHAR(255),
+    street        VARCHAR(255),
+    street_number VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS contacts
+(
+    id                 SERIAL PRIMARY KEY,
+    user_id            VARCHAR(255),
+    first_name         VARCHAR(255),
+    last_name          VARCHAR(255),
+    phone_number       VARCHAR(255),
+    email_address      VARCHAR(255),
+    billing_address_id BIGINT,
+    FOREIGN KEY (billing_address_id) REFERENCES addresses (id) ON DELETE SET NULL
 );
 
 create table if not exists last_seen_movies
@@ -155,7 +147,7 @@ VALUES (3, 'Plane', false, '/2g9ZBjUfF1X53EinykJqiBieUaO.jpg', '2023-01-13', 'DR
 
 -- Movie 4
 INSERT INTO movies (id, title, recommended, poster_path, release_date, type, author_id)
-VALUES (4, 'Avatar: The Way of Water', true, '/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg', '2022-12-14', 'SCI-FI', 4);
+VALUES (4, 'Avatar: The Way of Water', true, '/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg', '2022-12-14', 'COMEDY', 4);
 
 -- Movie 5
 INSERT INTO movies (id, title, recommended, poster_path, release_date, type, author_id)
@@ -189,7 +181,7 @@ INSERT INTO movies (id, title, recommended, author_id, poster_path, release_date
 VALUES (13, 'Teen Wolf: The Movie', true, 13, '/wAkpPm3wcHRqZl8XjUI3Y2chYq2.jpg', '2023-01-18', 'HORROR');
 
 INSERT INTO movies (id, title, recommended, author_id, poster_path, release_date, type)
-VALUES (14, 'Puss in Boots: The Last Wish', true, 14, '/kuf6dutpsT0vSVehic3EZIqkOBt.jpg', '2022-12-07', 'ANIMATION');
+VALUES (14, 'Puss in Boots: The Last Wish', true, 14, '/kuf6dutpsT0vSVehic3EZIqkOBt.jpg', '2022-12-07', 'COMEDY');
 
 INSERT INTO movies (id, title, recommended, author_id, poster_path, release_date, type)
 VALUES (15, 'Vikingulven', false, 15, '/9CxWs95VQWlOAdgE0iadrz3RPwH.jpg', '2022-11-18', 'HORROR');

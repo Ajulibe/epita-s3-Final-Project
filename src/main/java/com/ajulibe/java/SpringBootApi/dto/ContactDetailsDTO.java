@@ -2,6 +2,8 @@ package com.ajulibe.java.SpringBootApi.dto;
 
 
 public record ContactDetailsDTO(
+
+        String userId,
         String firstName,
         String lastName,
         String phoneNumber,

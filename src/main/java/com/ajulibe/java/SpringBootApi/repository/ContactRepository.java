@@ -32,4 +32,18 @@ public class ContactRepository {
         entityManager.persist(contact);
     }
 
+
+    @Transactional
+    public Contact findByEmailAddress(String emailAddress) {
+        String jpql = "SELECT c FROM Contact c WHERE c.emailAddress = :emailAddress";
+        TypedQuery<Contact> query = entityManager.createQuery(jpql, Contact.class);
+        query.setParameter("emailAddress", emailAddress);
+        List<Contact> contacts = query.getResultList();
+        if (contacts.isEmpty()) {
+            return null;
+        } else {
+            return contacts.get(0);
+        }
+    }
+
 }

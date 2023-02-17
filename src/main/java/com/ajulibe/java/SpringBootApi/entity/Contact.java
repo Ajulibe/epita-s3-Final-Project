@@ -13,9 +13,8 @@ public class Contact {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private UserEntity user;
+    @Column(unique = true)
+    private String userId;
 
     private String firstName;
 
