@@ -23,9 +23,10 @@ public class Contact {
     private String phoneNumber;
 
     private String emailAddress;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "billing_address_id")
+    @OneToOne
+    @JoinColumn(name = "billing_address_id", referencedColumnName = "id")
     private Address billingAddress;
+
+    // getters and setters
 
 }

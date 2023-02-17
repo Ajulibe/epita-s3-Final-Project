@@ -29,6 +29,7 @@ public class ContactRepository {
 
     @Transactional
     public void saveUserContactDetails(Contact contact) {
+        System.out.println(contact + "contact details--------------------------------------");
         entityManager.persist(contact);
     }
 

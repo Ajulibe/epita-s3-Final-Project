@@ -1,9 +1,11 @@
 package com.ajulibe.java.SpringBootApi.controller;
 
 
+import com.ajulibe.java.SpringBootApi.dto.MovieRating;
 import com.ajulibe.java.SpringBootApi.entity.Movie;
 import com.ajulibe.java.SpringBootApi.service.MoviesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,6 +52,18 @@ public class MoviesController {
     public ResponseEntity<List<Movie>> findRecommendedMovies() {
         List<Movie> movies = moviesService.findRecommendedMovies();
         return ResponseEntity.ok(movies);
+    }
+
+
+    @PostMapping("/rate-movie")
+    public ResponseEntity<?> rateMovie(@RequestBody MovieRating movieRating) {
+        System.out.println(movieRating.id() + movieRating.rating() + "...........................");
+        try {
+            moviesService.rateMovie(movieRating.id(), movieRating.rating());
+            return ResponseEntity.ok("Movie rating updated successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update movie rating");
+        }
     }
 
 

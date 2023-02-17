@@ -12,15 +12,17 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO public;
 
 
-create table if not exists movies
+CREATE TABLE IF NOT EXISTS movies
 (
-    id           SERIAL PRIMARY KEY,
-    title        VARCHAR(255),
-    recommended  VARCHAR(5),
-    author_id    BIGINT,
-    poster_path  VARCHAR(255),
-    release_date DATE,
-    type         VARCHAR(20)
+    id             SERIAL PRIMARY KEY,
+    title          VARCHAR(255),
+    recommended    VARCHAR(5),
+    author_id      BIGINT,
+    poster_path    VARCHAR(255),
+    release_date   DATE,
+    type           VARCHAR(20),
+    num_viewers    INTEGER          DEFAULT 1,
+    current_rating DOUBLE PRECISION DEFAULT 1.0
 );
 
 CREATE TABLE authors
@@ -64,8 +66,7 @@ create table if not exists users
 );
 
 
-
-CREATE TABLE IF NOT EXISTS addresses
+create table if not exists addresses
 (
     id            SERIAL PRIMARY KEY,
     country       VARCHAR(255),
@@ -75,17 +76,19 @@ CREATE TABLE IF NOT EXISTS addresses
     street_number VARCHAR(255)
 );
 
-CREATE TABLE IF NOT EXISTS contacts
+create table if not exists contacts
 (
     id                 SERIAL PRIMARY KEY,
-    user_id            VARCHAR(255),
+    user_id            VARCHAR(255) UNIQUE,
     first_name         VARCHAR(255),
     last_name          VARCHAR(255),
     phone_number       VARCHAR(255),
     email_address      VARCHAR(255),
     billing_address_id BIGINT,
-    FOREIGN KEY (billing_address_id) REFERENCES addresses (id) ON DELETE SET NULL
+    FOREIGN KEY (billing_address_id) REFERENCES addresses (id)
 );
+
+
 
 create table if not exists last_seen_movies
 (

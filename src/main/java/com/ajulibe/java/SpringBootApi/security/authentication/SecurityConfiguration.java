@@ -100,6 +100,7 @@ public class SecurityConfiguration {
         // Protect endpoints at /api/<type>/secure
         http.authorizeRequests(configurer ->
                         configurer
+                                .antMatchers("/rate-movie").permitAll()
                                 .antMatchers("/api/v1/**")
                                 .authenticated())
                 .oauth2ResourceServer()

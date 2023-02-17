@@ -55,4 +55,18 @@ public class MoviesRepository implements MoviesInterface  {
         return query.getResultList();
     }
 
+
+    @Transactional
+    public void rateMovie(Long id, int rating) {
+        Movie movie = entityManager.find(Movie.class, id);
+        if (movie != null) {
+            int newNumViewers = movie.getNumViewers() + 1;
+            double newRatingSum = movie.getCurrentRating() * movie.getNumViewers() + rating;
+            double newRating = newRatingSum / newNumViewers;
+            movie.setCurrentRating(newRating);
+            movie.setNumViewers(newNumViewers);
+            entityManager.persist(movie);
+        }
+    }
+
 }

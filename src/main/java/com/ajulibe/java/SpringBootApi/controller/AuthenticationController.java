@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
 import javax.validation.Valid;
 
 
@@ -19,15 +18,14 @@ import javax.validation.Valid;
 @RequestMapping("/api/v1")
 public class AuthenticationController {
 
-    private AddressRepository addressRepository;
-    private ContactRepository contactRepository;
+    private final AddressRepository addressRepository;
+    private final ContactRepository contactRepository;
 
 
     @Autowired
     public AuthenticationController(AddressRepository addressRepository, ContactRepository contactRepository) {
         this.addressRepository = addressRepository;
         this.contactRepository = contactRepository;
-
     }
 
     @PostMapping("/store-details")
@@ -35,7 +33,7 @@ public class AuthenticationController {
         try {
             // Check if the contact already exists
             if (contactRepository.findByEmailAddress(contactDetails.emailAddress()) != null) {
-                return ResponseEntity.status(HttpStatus.CONFLICT).body("Contact with the same email address already exists");
+                return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body("Contact with the same email address already exists");
             }
 
 
@@ -58,7 +56,7 @@ public class AuthenticationController {
             // Save the Address entity
             addressRepository.save(address);
             // Set the billing address of the Contact entity
-            contact.setBillingAddress(null);
+            contact.setBillingAddress(address);
             // Save the Contact entity
             contactRepository.saveUserContactDetails(contact);
 

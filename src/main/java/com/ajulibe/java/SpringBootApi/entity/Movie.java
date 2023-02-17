@@ -14,6 +14,7 @@ import java.util.Objects;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 @Entity
 @Table(name = "movies")
 public class Movie {
@@ -38,17 +39,10 @@ public class Movie {
     @Enumerated(EnumType.STRING)
     private MovieType type;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Movie movie = (Movie) o;
-        return id != null && Objects.equals(id, movie.id);
-    }
+    private double currentRating = 1.0;
+    private int numViewers = 1;
 
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
+    public Movie(Long id, String title, String recommended, Author author, String poster_path, Date releaseDate, MovieType type) {
     }
 }
 

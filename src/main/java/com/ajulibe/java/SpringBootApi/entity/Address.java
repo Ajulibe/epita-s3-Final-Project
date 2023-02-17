@@ -1,16 +1,15 @@
 package com.ajulibe.java.SpringBootApi.entity;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.Objects;
 
+
 @Getter
 @Setter
+@Data
 @ToString
 @RequiredArgsConstructor
 @Entity
@@ -31,16 +30,8 @@ public class Address {
 
     private String streetNumber;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Address address = (Address) o;
-        return id != null && Objects.equals(id, address.id);
-    }
+    @OneToOne(mappedBy = "billingAddress")
+    private Contact contact;
 
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
+
 }

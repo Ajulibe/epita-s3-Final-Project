@@ -70,4 +70,8 @@ public class MoviesService {
     }
 
 
+    public void rateMovie (Long id, int rating) {
+        moviesRepository.rateMovie(id, rating);
+    }
+
 }
