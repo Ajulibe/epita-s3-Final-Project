@@ -8,3 +8,4 @@ s3_prefix = "movie-db"
 region = "eu-west-3"
 capabilities = "CAPABILITY_IAM"
 image_repositories = []
+disable_rollback = true
