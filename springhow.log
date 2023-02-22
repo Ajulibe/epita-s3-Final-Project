@@ -4496,3 +4496,9 @@
 2023-02-22 19:37:00.385 DEBUG 15407 --- [restartedMain] j.S.s.a.f.JsonObjectAuthenticationFilter : Filter 'authenticationFilter' configured for use
 2023-02-22 19:37:01.266  WARN 15407 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
 2023-02-22 19:37:01.534  INFO 15407 --- [restartedMain] c.a.j.S.SpringBootApiApplication         : Started SpringBootApiApplication in 3.265 seconds (JVM running for 3.598)
+2023-02-22 19:56:18.958  INFO 17732 --- [restartedMain] c.a.j.S.SpringBootApiApplication         : Starting SpringBootApiApplication using Java 19 on Akachukwus-MacBook-Pro-2.local with PID 17732 (/Users/akachukwuajulibe/Desktop/Java Final project/mod/target/classes started by akachukwuajulibe in /Users/akachukwuajulibe/Desktop/Java Final project/mod)
+2023-02-22 19:56:18.959 DEBUG 17732 --- [restartedMain] c.a.j.S.SpringBootApiApplication         : Running with Spring Boot v2.7.4, Spring v5.3.23
+2023-02-22 19:56:18.960  INFO 17732 --- [restartedMain] c.a.j.S.SpringBootApiApplication         : No active profile set, falling back to 1 default profile: "default"
+2023-02-22 19:56:21.216 DEBUG 17732 --- [restartedMain] j.S.s.a.f.JsonObjectAuthenticationFilter : Filter 'authenticationFilter' configured for use
+2023-02-22 19:56:22.110  WARN 17732 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-02-22 19:56:22.432  INFO 17732 --- [restartedMain] c.a.j.S.SpringBootApiApplication         : Started SpringBootApiApplication in 3.651 seconds (JVM running for 4.182)
