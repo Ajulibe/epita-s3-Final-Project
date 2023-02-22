@@ -5,11 +5,11 @@
 --FLYWAY IS ALSO CONFIGURED. IT WILL AUTOMATICALLY CREATE THE SCHEMA BELOW IF THE TABLE EXISTS
 
 --you can use this statement to quickly delete all tables in the database
-DROP SCHEMA public CASCADE;
-CREATE SCHEMA public;
-
-GRANT ALL ON SCHEMA public TO postgres;
-GRANT ALL ON SCHEMA public TO public;
+-- DROP SCHEMA public CASCADE;
+-- CREATE SCHEMA public;
+--
+-- GRANT ALL ON SCHEMA public TO postgres;
+-- GRANT ALL ON SCHEMA public TO public;
 
 
 CREATE TABLE IF NOT EXISTS movies

@@ -55,16 +55,4 @@ public class MoviesController {
     }
 
 
-    @PostMapping("/rate-movie")
-    public ResponseEntity<?> rateMovie(@RequestBody MovieRating movieRating) {
-        System.out.println(movieRating.id() + movieRating.rating() + "...........................");
-        try {
-            moviesService.rateMovie(movieRating.id(), movieRating.rating());
-            return ResponseEntity.ok("Movie rating updated successfully");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update movie rating");
-        }
-    }
-
-
 }

@@ -20,8 +20,6 @@ public class RatingController {
 
     @PostMapping("/rate-movie")
     public ResponseEntity<?> rateMovie(@RequestBody MovieRating movieRating) {
-        System.out.println(movieRating.id() + "..............id.............");
-        System.out.println(movieRating.rating() + "..........rating.................");
         try {
             moviesService.rateMovie(movieRating.id(), movieRating.rating());
             return ResponseEntity.ok("Movie rating updated successfully");

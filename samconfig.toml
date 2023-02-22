@@ -1,0 +1,10 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "movie-db"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-5f3u39uvaiye"
+s3_prefix = "movie-db"
+region = "eu-west-3"
+capabilities = "CAPABILITY_IAM"
+image_repositories = []

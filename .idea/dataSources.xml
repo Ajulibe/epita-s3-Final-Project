@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/movie_db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="truuudey@kandula.db.elephantsql.com" uuid="2a49c2b2-043f-43b2-9c85-86e81330896a">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://kandula.db.elephantsql.com:5432/truuudey</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
